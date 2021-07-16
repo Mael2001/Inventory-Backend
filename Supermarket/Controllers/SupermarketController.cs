@@ -24,14 +24,14 @@ namespace Supermarket.Controllers
         [HttpGet("")]
         public IReadOnlyList<Groceries> Get()
         {
-            return _assistantDbContext.Grocery.ToList();
+            return _assistantDbContext.Grocery.OrderBy(z=> z.expirationDate).ToList();
         }
 
         // GET: api/<SupermarketController>
         [HttpGet("/filter/{name}")]
         public IReadOnlyList<Groceries> Get(string name)
         {
-            return _assistantDbContext.Grocery.Where(x=>x.name.ToLower().Contains(name.ToLower())).ToList();
+            return _assistantDbContext.Grocery.Where(x=>x.name.ToLower().Contains(name.ToLower())).OrderBy(z => z.expirationDate).ToList();
         }
         // GET api/<SupermarketController>/5
         [HttpGet("{id}")]
